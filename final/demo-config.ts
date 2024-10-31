@@ -1,4 +1,4 @@
-import { DemoConfig } from "@/lib/types";
+import { DemoConfig, ParameterLocation, SelectedTool } from "@/lib/types";
 
 function getSystemPrompt() {
   let sysPrompt: string;
@@ -35,7 +35,15 @@ function getSystemPrompt() {
     CARAMEL MOCHA LATTE $3.49
 
   ## Conversation Flow
-  1. Greeting -> Order Taking -> Order Confirmation -> Payment Direction
+  1. Greeting -> Order Taking -> Call "updateOrder" Tool -> Order Confirmation -> Payment Direction
+
+  ## Tool Usage Rules
+  - You must call the tool "updateOrder" immediately when:
+    - User confirms an item
+    - User requests item removal
+    - User modifies quantity
+  - Do not emit text during tool calls
+  - Validate menu items before calling updateOrder
 
   ## Response Guidelines
   1. Voice-Optimized Format
@@ -63,6 +71,7 @@ function getSystemPrompt() {
     - Menu inquiries: Provide 2-3 relevant suggestions
 
   5. Order confirmation
+    - Call the "updateOrder" tool first
     - Only confirm the full order at the end when the customer is done
 
   ## Error Handling
@@ -72,6 +81,9 @@ function getSystemPrompt() {
   2. Unclear Input
     - Request clarification
     - Offer specific options
+  3. Invalid Tool Calls
+    - Validate before calling
+    - Handle failures gracefully
 
   ## State Management
   - Track order contents
@@ -86,6 +98,37 @@ function getSystemPrompt() {
   return sysPrompt;
 }
 
+const selectedTools: SelectedTool[] = [
+  {
+    "temporaryTool": {
+      "modelToolName": "updateOrder",
+      "description": "Update order details. Used any time items are added or removed or when the order is finalized. Call this any time the user updates their order.",      
+      "dynamicParameters": [
+        {
+          "name": "orderDetailsData",
+          "location": ParameterLocation.BODY,
+          "schema": {
+            "description": "An array of objects contain order items.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": { "type": "string", "description": "The name of the item to be added to the order." },
+                "quantity": { "type": "number", "description": "The quantity of the item for the order." },
+                "specialInstructions": { "type": "string", "description": "Any special instructions that pertain to the item." },
+                "price": { "type": "number", "description": "The unit price for the item." },
+              },
+              "required": ["name", "quantity", "price"]
+            }
+          },
+          "required": true
+        },
+      ],
+      "client": {}
+    }
+  },
+];
+
 export const demoConfig: DemoConfig = {
   title: "Dr. Donut",
   overview: "This agent has been prompted to facilitate orders at a fictional drive-thru called Dr. Donut.",
@@ -93,6 +136,7 @@ export const demoConfig: DemoConfig = {
     systemPrompt: getSystemPrompt(),
     model: "fixie-ai/ultravox-70B",
     languageHint: "en",
+    selectedTools: selectedTools,
     voice: "terrence",
     temperature: 0.4
   }

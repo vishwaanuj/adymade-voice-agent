@@ -7,11 +7,10 @@ import { CallConfig, SelectedTool } from '@/lib/types'
 import demoConfig from '@/app/demo-config';
 import { Role, Transcript, UltravoxExperimentalMessageEvent, UltravoxSessionStatus } from 'ultravox-client';
 import BorderedImage from '@/components/BorderedImage';
-import UVLogo from '@/public/UVMark-White.svg';
 import CallStatus from '@/components/CallStatus';
 import DebugMessages from '@/components/DebugMessages';
 import MicToggleButton from '@/components/MicToggleButton';
-import { PhoneOffIcon } from 'lucide-react';
+import { PhoneOffIcon, Mic, Play } from 'lucide-react';
 
 type SearchParamsProps = {
   showMuteSpeakerButton: boolean;
@@ -38,6 +37,13 @@ function SearchParamsHandler({ children }: SearchParamsHandlerProps) {
 
   return children({ showMuteSpeakerButton, modelOverride, showDebugMessages, showUserTranscripts });
 }
+
+// Adymade Logo Component
+const AdymadeLogo = () => (
+  <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-full shadow-lg">
+    <span className="text-white font-bold text-2xl">A</span>
+  </div>
+);
 
 export default function Home() {
   const [isCallActive, setIsCallActive] = useState(false);
@@ -141,83 +147,101 @@ export default function Home() {
     <Suspense fallback={<div>Loading...</div>}>
       <SearchParamsHandler>
         {({ showMuteSpeakerButton, modelOverride, showDebugMessages, showUserTranscripts }: SearchParamsProps) => (
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center px-4">
             {/* Main Area */}
-            <div className="max-w-[1206px] mx-auto w-full py-5 pl-5 pr-[10px] border border-[#2A2A2A] rounded-[3px]">
-              <div className="flex flex-col justify-center lg:flex-row ">
+            <div className="max-w-[1206px] mx-auto w-full py-8 px-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-2xl">
+              <div className="flex flex-col justify-center lg:flex-row">
                 {/* Action Area */}
-                <div className="w-full lg:w-2/3">
-                  <h1 className="text-2xl font-bold w-full">{demoConfig.title}</h1>
-                  <div className="flex flex-col justify-between items-start h-full font-mono p-4 ">
-                    <div className="mt-20 self-center">
-                      <BorderedImage
-                        src={UVLogo}
-                        alt="todo"
-                        size="md"
-                      />
+                <div className="w-full lg:w-2/3 pr-0 lg:pr-8">
+                  <div className="flex items-center space-x-3 mb-6">
+                    <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse"></div>
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                      {demoConfig.title}
+                    </h1>
+                  </div>
+                  
+                  <div className="flex flex-col justify-between items-start h-full p-6">
+                    <div className="mt-12 self-center">
+                      <AdymadeLogo />
                     </div>
+                    
                     {isCallActive ? (
-                      <div className="w-full">
-                        <div className="mb-5 relative">
+                      <div className="w-full mt-8">
+                        <div className="mb-6 relative">
                           <div 
                             ref={transcriptContainerRef}
-                            className="h-[300px] p-2.5 overflow-y-auto relative"
+                            className="h-[300px] p-4 overflow-y-auto relative bg-black/20 rounded-xl border border-white/10"
                           >
                             {callTranscript && callTranscript.map((transcript, index) => (
-                              <div key={index}>
+                              <div key={index} className="mb-3">
                                 {showUserTranscripts ? (
                                   <>
-                                    <p><span className="text-gray-600">{transcript.speaker === 'agent' ? "Ultravox" : "User"}</span></p>
-                                    <p className="mb-4"><span>{transcript.text}</span></p>
+                                    <p className="text-purple-300 text-sm font-medium mb-1">
+                                      {transcript.speaker === 'agent' ? "AI Assistant" : "You"}
+                                    </p>
+                                    <p className="text-gray-100 bg-white/5 rounded-lg p-3">
+                                      {transcript.text}
+                                    </p>
                                   </>
                                 ) : (
                                   transcript.speaker === 'agent' && (
                                     <>
-                                      <p><span className="text-gray-600">{transcript.speaker === 'agent' ? "Ultravox" : "User"}</span></p>
-                                      <p className="mb-4"><span>{transcript.text}</span></p>
+                                      <p className="text-purple-300 text-sm font-medium mb-1">AI Assistant</p>
+                                      <p className="text-gray-100 bg-white/5 rounded-lg p-3">
+                                        {transcript.text}
+                                      </p>
                                     </>
                                   )
                                 )}
                               </div>
                             ))}
                           </div>
-                          <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-t from-transparent to-black pointer-events-none" />
+                          <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-black/20 to-transparent pointer-events-none rounded-t-xl" />
                         </div>
-                        <div className="flex justify-between space-x-4 p-4 w-full">
+                        
+                        <div className="flex justify-between space-x-4 w-full">
                           <MicToggleButton role={Role.USER}/>
                           { showMuteSpeakerButton && <MicToggleButton role={Role.AGENT}/> }
                           <button
                             type="button"
-                            className="flex-grow flex items-center justify-center h-10 bg-red-500"
+                            className="flex-grow flex items-center justify-center h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg"
                             onClick={handleEndCallButtonClick}
                             disabled={!isCallActive}
                           >
-                            <PhoneOffIcon width={24} className="brightness-0 invert" />
-                            <span className="ml-2">End Call</span>
+                            <PhoneOffIcon width={20} className="text-white mr-2" />
+                            <span>End Call</span>
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <div>
-                        <div className="h-[300px] text-gray-400 mb-6 mt-32 lg:mt-0">
-                          {demoConfig.overview}
+                      <div className="w-full mt-8">
+                        <div className="h-[300px] text-gray-300 mb-8 text-center flex flex-col justify-center">
+                          <div className="mb-6">
+                            <Play className="w-16 h-16 mx-auto text-purple-400 mb-4" />
+                          </div>
+                          <p className="text-lg leading-relaxed max-w-md mx-auto">
+                            {demoConfig.overview}
+                          </p>
                         </div>
                         <button
                           type="button"
-                          className="hover:bg-gray-700 px-6 py-2 border-2 w-full mb-4"
+                          className="w-full h-14 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
                           onClick={() => handleStartCallButtonClick(modelOverride, showDebugMessages)}
                         >
-                          Start Call
+                          <Mic className="w-5 h-5" />
+                          <span>Start Voice Demo</span>
                         </button>
                       </div>
                     )}
                   </div>
                 </div>
+                
                 {/* Call Status */}
                 <CallStatus status={agentStatus}>
                 </CallStatus>
               </div>
             </div>
+            
             {/* Debug View */}
             <DebugMessages debugMessages={callDebugMessages} />
           </div>

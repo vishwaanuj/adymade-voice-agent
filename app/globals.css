@@ -3,20 +3,19 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 15, 23, 42;
+  --background-end-rgb: 88, 28, 135;
+  
+  /* Adymade Brand Colors */
+  --adymade-primary: #8b5cf6;
+  --adymade-secondary: #ec4899;
+  --adymade-accent: #06b6d4;
+  --adymade-dark: #0f172a;
+  --adymade-light: #f8fafc;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-/* Monospace Font */
+/* Enhanced Font Loading */
 @font-face {
   font-family: "ReplicaLLMono";
   src: url("./fonts/ReplicaMonoLLWeb-Regular.woff2") format("woff2");
@@ -92,36 +91,109 @@
 
 @layer base {
   html {
-    font-family: ReplicaLL;
+    font-family: ReplicaLL, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(135deg, #0f172a 0%, #4c1d95 50%, #0f172a 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Adymade Button Styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-white/10 hover:bg-white/20 text-white font-medium py-2 px-4 rounded-lg border border-white/20 transition-all duration-300 backdrop-blur-sm;
+  }
+  
+  /* Glass morphism cards */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl shadow-2xl;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent;
   }
 }
 
 @layer utilities {
+  /* Enhanced Scrollbar Styles */
   .scrollbar-visible {
-    scrollbar-width: thin;  /* For Firefox */
-    scrollbar-color: #888 #f1f1f1;  /* For Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.5) transparent;
     overflow-y: scroll;
     overflow-x: hidden;
   }
 
   .scrollbar-visible::-webkit-scrollbar {
-    width: 12px;
-    background-color: #f1f1f1;
+    width: 8px;
+    background-color: transparent;
   }
 
   .scrollbar-visible::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 20px;
-    border: 3px solid #f1f1f1;
+    background: linear-gradient(to bottom, #8b5cf6, #ec4899);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .scrollbar-visible::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+    background: linear-gradient(to bottom, #7c3aed, #db2777);
   }
 
-  /* Ensure the scrollbar is always visible in WebKit browsers */
   .scrollbar-visible::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
-    border-radius: 20px;
+    background-color: transparent;
+    border-radius: 10px;
+  }
+  
+  /* Thin scrollbar variant */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.5);
+    border-radius: 2px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* Custom animations */
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+    }
+    to {
+      box-shadow: 0 0 30px rgba(236, 72, 153, 0.7), 0 0 40px rgba(139, 92, 246, 0.3);
+    }
+  }
+  
+  /* Floating animation */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 }

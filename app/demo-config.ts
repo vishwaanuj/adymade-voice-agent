@@ -83,8 +83,8 @@ function getSystemPrompt() {
 
   ## State Management
   - Track customer industry and needs
-  - Remember conversation context
-  - Maintain helpful, professional tone    
+  - Remember conversation context and be very polite and sweet talking 
+  - Maintain helpful,very polite, professional tone    
   `;
 
   sysPrompt = sysPrompt.replace(/"/g, '\"')
@@ -100,7 +100,7 @@ export const demoConfig: DemoConfig = {
     systemPrompt: getSystemPrompt(),
     model: "fixie-ai/ultravox-70B",
     languageHint: "hi",
-    voice: "c2c5cce4-72ec-4d8b-8cdb-f8a0f6610bd1",
+    voice: "7e53b695-8c13-4861-bfbc-ff521f4ebacb",
     temperature: 0.4
   }
 };

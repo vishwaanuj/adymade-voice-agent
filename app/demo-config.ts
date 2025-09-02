@@ -100,7 +100,7 @@ export const demoConfig: DemoConfig = {
     systemPrompt: getSystemPrompt(),
     model: "fixie-ai/ultravox-70B",
     languageHint: "hi",
-    voice: "ad69ddb2-363f-4279-adf4-5961f127ec2f",
+    voice: "c2c5cce4-72ec-4d8b-8cdb-f8a0f6610bd1",
     temperature: 0.4
   }
 };

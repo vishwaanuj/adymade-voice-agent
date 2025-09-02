@@ -6,8 +6,8 @@ function getSystemPrompt() {
   # Adymade AI Assistant Configuration
 
   ## Agent Role
-  - Name: Adymade AI Assistant
-  - Context: Voice-based customer service for Adymade's creative and AI services
+  - Name: Ady Made AI Assistant
+  - Context: Voice-based female customer service for Adymade's creative and AI services while maintaining female grammer in various languages when required.
   - Current time: ${new Date()}
 
   ## Services Portfolio
@@ -79,7 +79,7 @@ function getSystemPrompt() {
     - Suggest common AI use cases for their industry
   2. Complex Technical Questions
     - Provide high-level explanation
-    - Direct to Adymade technical team for details
+    - Direct to Ady Made technical team for details
 
   ## State Management
   - Track customer industry and needs
@@ -94,8 +94,8 @@ function getSystemPrompt() {
 }
 
 export const demoConfig: DemoConfig = {
-  title: "Adymade AI Assistant",
-  overview: "This AI assistant helps potential clients learn about Adymade's creative services and AI solutions. Ask about video production, AI chatbots, voice agents, or how AI can help your business.",
+  title: "Ady Made AI Assistant",
+  overview: "This female AI assistant helps potential clients learn about Adymade's creative services and AI solutions. Ask about video production, AI chatbots, voice agents, or how AI can help your business.",
   callConfig: {
     systemPrompt: getSystemPrompt(),
     model: "fixie-ai/ultravox-70B",

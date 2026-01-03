@@ -112,9 +112,7 @@ export const demoConfig: DemoConfig = {
     
     voice: "ee21f5b7-47d7-47a4-b83f-930aa91fdcc6",
     
-    medium: {
-      webRtc: {}
-    },
+  
     
     // Slightly lower temperature for more consistent script usage
     temperature: 0.5

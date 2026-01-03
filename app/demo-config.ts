@@ -160,7 +160,7 @@ export const demoConfig: DemoConfig = {
     model: "fixie-ai/ultravox-70B",
     languageHint: "auto",
     voice: "a0998448-6810-4b44-bc90-ccb69d2a26f5",
-    temperature: 0.3
+    temperature: 0.5
   }
 };
 

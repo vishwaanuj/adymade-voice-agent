@@ -38,10 +38,10 @@ function SearchParamsHandler({ children }: SearchParamsHandlerProps) {
   return children({ showMuteSpeakerButton, modelOverride, showDebugMessages, showUserTranscripts });
 }
 
-// Adymade Logo Component
-const AdymadeLogo = () => (
-  <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 via-pink-500 to-purple-600 rounded-full shadow-lg">
-    <span className="text-white font-bold text-2xl">A</span>
+// Bippo Logo Component (red theme)
+const BippoLogo = () => (
+  <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-red-500 via-red-400 to-red-600 rounded-full shadow-lg">
+    <span className="text-white font-bold text-2xl">B</span>
   </div>
 );
 
@@ -154,15 +154,15 @@ export default function Home() {
                 {/* Action Area */}
                 <div className="w-full lg:w-2/3 pr-0 lg:pr-8">
                   <div className="flex items-center space-x-3 mb-6">
-                    <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full animate-pulse"></div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    <div className="w-3 h-3 bg-gradient-to-r from-red-400 to-red-600 rounded-full animate-pulse"></div>
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
                       {demoConfig.title}
                     </h1>
                   </div>
                   
                   <div className="flex flex-col justify-between items-start h-full p-6">
                     <div className="mt-12 self-center">
-                      <AdymadeLogo />
+                      <BippoLogo />
                     </div>
                     
                     {isCallActive ? (
@@ -176,7 +176,7 @@ export default function Home() {
                               <div key={index} className="mb-3">
                                 {showUserTranscripts ? (
                                   <>
-                                    <p className="text-purple-300 text-sm font-medium mb-1">
+                                    <p className="text-red-300 text-sm font-medium mb-1">
                                       {transcript.speaker === 'agent' ? "AI Assistant" : "You"}
                                     </p>
                                     <p className="text-gray-100 bg-white/5 rounded-lg p-3">
@@ -186,7 +186,7 @@ export default function Home() {
                                 ) : (
                                   transcript.speaker === 'agent' && (
                                     <>
-                                      <p className="text-purple-300 text-sm font-medium mb-1">AI Assistant</p>
+                                      <p className="text-red-300 text-sm font-medium mb-1">AI Assistant</p>
                                       <p className="text-gray-100 bg-white/5 rounded-lg p-3">
                                         {transcript.text}
                                       </p>
@@ -204,7 +204,7 @@ export default function Home() {
                           { showMuteSpeakerButton && <MicToggleButton role={Role.AGENT}/> }
                           <button
                             type="button"
-                            className="flex-grow flex items-center justify-center h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg"
+                            className="flex-grow flex items-center justify-center h-12 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg"
                             onClick={handleEndCallButtonClick}
                             disabled={!isCallActive}
                           >
@@ -217,7 +217,7 @@ export default function Home() {
                       <div className="w-full mt-8">
                         <div className="h-[300px] text-gray-300 mb-8 text-center flex flex-col justify-center">
                           <div className="mb-6">
-                            <Play className="w-16 h-16 mx-auto text-purple-400 mb-4" />
+                            <Play className="w-16 h-16 mx-auto text-red-400 mb-4" />
                           </div>
                           <p className="text-lg leading-relaxed max-w-md mx-auto">
                             {demoConfig.overview}
@@ -225,7 +225,7 @@ export default function Home() {
                         </div>
                         <button
                           type="button"
-                          className="w-full h-14 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
+                          className="w-full h-14 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center space-x-2"
                           onClick={() => handleStartCallButtonClick(modelOverride, showDebugMessages)}
                         >
                           <Mic className="w-5 h-5" />

@@ -113,17 +113,30 @@ interface HttpAuthRequirement {
   scheme: string;
 }
 
-export interface CallConfig {
-  systemPrompt: string;
+export type TtsProvider = "cartesia" | "other";
+
+export interface CartesiaTtsConfig {
+  voiceId: string;
   model?: string;
+}
+
+export interface TtsConfig {
+  provider: TtsProvider;
+  cartesia?: CartesiaTtsConfig;
+}
+
+export interface CallConfig {
+  systemPrompt?: string;
+  model?: string;
+  voice?:string;
+  temperature?: number;
   languageHint?: string;
   selectedTools?: SelectedTool[];
   initialMessages?: Message[];
-  voice?: string;
-  temperature?: number;
   maxDuration?: string;
   timeExceededMessage?: string;
   callKey?: string;
+  tts?: TtsConfig;
 }
 
 export interface DemoConfig {

@@ -105,15 +105,10 @@ export const demoConfig: DemoConfig = {
   callConfig: {
     systemPrompt: getSystemPrompt(),
     model: "fixie-ai/ultravox-70B",
-    
     // Use "en" as language hint since we want responses in Roman/Latin script
     // This helps the TTS engine pronounce Romanized Telugu/Hindi correctly
     languageHint: "auto",
-    
     voice: "ee21f5b7-47d7-47a4-b83f-930aa91fdcc6",
-    
-  
-    
     // Slightly lower temperature for more consistent script usage
     temperature: 0.5
   }

@@ -100,7 +100,7 @@ Bippo: "Haan bilkul! Hum infrastructure, civil aur EPC projects karte hain. Aapk
 export const demoConfig: DemoConfig = {
   title: "Bippo Infra Projects – Bippo AI Assistant",
   overview:
-    "A calm, professional female AI voice assistant for Bippo Infra Projects with language mirroring in Romanized script.",
+    "A calm, professional female AI voice assistant for Bippo Infra Projects",
 
   callConfig: {
     systemPrompt: getSystemPrompt(),

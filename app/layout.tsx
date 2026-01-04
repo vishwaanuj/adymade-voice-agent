@@ -103,7 +103,7 @@ export default function RootLayout({
                 </a>
               </div>
               
-              {/* Copyright */}
+            
               <p className="text-gray-400 text-sm">
                 © {new Date().getFullYear()} Bippo. All rights reserved.
               </p>

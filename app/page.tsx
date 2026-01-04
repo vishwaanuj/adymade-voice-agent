@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useCallback, useEffect, useRef, Suspense } from 'react';
@@ -183,7 +182,10 @@ export default function Home() {
                             {demoConfig.title}
                           </span>
                         </h1>
-                      
+                        
+                        <p className="text-gray-600 text-lg leading-relaxed">
+                          Experience natural voice conversation powered by advanced AI
+                        </p>
                       </div>
                       
                       {/* Logo - Centered when inactive */}
@@ -278,7 +280,7 @@ export default function Home() {
                         </div>
                       ) : (
                         /* Pre-Call State */
-                        <div className="space-y-1">
+                        <div className="space-y-8">
                           {/* Overview Card */}
                           <div className="bg-gradient-to-br from-red-50 to-blue-50 rounded-2xl p-8 border border-red-100">
                             <div className="flex items-start gap-4 mb-4">
@@ -294,8 +296,7 @@ export default function Home() {
                             </div>
                           </div>
                           
-                          {/* Features Grid */}
-                        
+                         
                           
                           {/* Start Button */}
                           <button
@@ -315,7 +316,7 @@ export default function Home() {
                     </div>
                     
                     {/* Right Panel - Call Status */}
-                    <div className="w-full lg:w-1/3 bg-gradient-to-br from-gray-50 to-white border-l border-gray-200 -mt-12 p-2 lg:p-10">
+                    <div className="w-full lg:w-1/3 bg-gradient-to-br from-gray-50 to-white border-l border-gray-200 p-8 lg:p-10">
                       <CallStatus status={agentStatus} />
                     </div>
                   </div>
